@@ -28,6 +28,11 @@ if [ "$1" = 'dbaccess' ]; then
   done
 
 	exec "/opt/totvs/dbaccess/multi/dbaccess64opt"
+
+elif [ "$1" = 'dbmonitor' ]; then
+
+  exec "/opt/totvs/dbaccess/dbmonitor"
+
 fi
 
 exec "$@"
