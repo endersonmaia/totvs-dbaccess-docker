@@ -6,7 +6,7 @@ Docker é um _runtime_ para execução de LinuX _Containers_ (LXC). Este reposit
 
 ## Como usar esta imagem ?
 
-Você pode clonar este reposutório e construir a sua própria imagem. O repositóprio pretende manter-se em sincronia com os lançamentos dos novos binários do TOTVS DBAccess fornecidos pela TOTVS. Então, para cada release, haverá uma tag no repositório.
+Você pode clonar este repositório e construir a sua própria imagem. O repositório pretende manter-se em sincronia com os lançamentos dos novos binários do TOTVS DBAccess fornecidos pela TOTVS. Então, para cada release, haverá uma tag no repositório.
 
 Quando clonar o repositório, basta fazer o checkout para a tag específica, baixar o arquivo `.tar.gz` do DBAccess correspondente àquela tag (https://suporte.totvs.com/download), e executar o comando `$ docker build .`.
 
