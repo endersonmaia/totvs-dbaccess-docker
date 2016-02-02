@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 export DB_HOST=${DB_HOST:-${POSTGRES_PORT_5432_TCP_ADDR}}
 export DB_PORT=${DB_PORT:-${POSTGRES_PORT_5432_TCP_PORT}}
-export DB_USER=${DB_USER:-${POSTGRES_ENV_POSTGRES_USER}:-postgres}
-export DB_PASS=${DB_PASS:-${POSTGRES_ENV_POSTGRES_PASSWORD}}
+export DB_USER=${DB_USER:-${POSTGRES_ENV_POSTGRES_USER:-postgres}}
+export DB_PASS=${DB_PASS:-${POSTGRES_ENV_POSTGRES_PASS}}
 export DB_NAME=${DB_NAME:-${POSTGRES_ENV_POSTGRES_USER}}
 
 /bin/sed 's/{{DB_HOST}}/'"${DB_HOST}"'/' -i /root/.odbc.ini

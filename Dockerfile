@@ -27,10 +27,8 @@ RUN yum -y update \
 
 ADD 15-06-12-DBACCESS_LINUX64_20141119.TAR.GZ /opt/totvs/dbaccess
 
-COPY /build/*.sh /
-COPY /build/*.ini /tmp/
-
-RUN /setup.sh
+ADD /build /build
+RUN /build/setup.sh
 
 EXPOSE 7890
 
