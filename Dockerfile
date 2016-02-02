@@ -1,4 +1,4 @@
-FROM tianon/centos:6.5
+FROM centos:6
 
 MAINTAINER Enderson Maia <endersonmaia@gmail.com>
 
@@ -24,7 +24,7 @@ RUN yum -y update \
       nc \
     && rm -rf /var/cache/yum/* \
     && yum clean all
-                  
+
 ADD 15-06-12-DBACCESS_LINUX64_20141119.TAR.GZ /opt/totvs/dbaccess
 
 COPY /build/*.sh /
