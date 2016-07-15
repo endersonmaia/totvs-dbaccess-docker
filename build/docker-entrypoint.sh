@@ -21,7 +21,7 @@ export LICENSE_SERVER_PORT=${LICENSE_SERVER_PORT:-5555}
 
 if [ "$1" = 'dbaccess' ]; then
 
-  until nc -z $DB_HOST $DB_PORT
+  until echo -n > /dev/tcp/$DB_HOST/$DB_PORT
   do
       echo "Esperando serviço de banco de dados..."
       sleep 0.5
