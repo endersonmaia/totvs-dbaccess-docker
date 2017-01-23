@@ -1,13 +1,13 @@
-FROM centos:7.2.1511
+FROM centos:7.3.1611
 
-MAINTAINER Enderson Maia <endersonmaia@gmail.com>
-
-RUN yum -y update && rm -rf /var/cache/yum/* && yum clean all
+LABEL maintainer "Enderson Maia <endersonmaia@gmail.com>"
 
 RUN yum -y update \
     && yum -y install \
-      postgresql postgresql-odbc \
       dejavu-lgc-sans-fonts\
+      libexpat.i686 \
+      libfreetype.i686  \
+      libGL.i686  \
       libICE.i686 \
       libSM.i686  \
       libXcursor.i686 \
@@ -18,18 +18,21 @@ RUN yum -y update \
       libXrandr.i686  \
       libXrender.i686 \
       mesa-libGL.i686 \
-      nc \
+      postgresql \
+      postgresql-odbc \
+      zlib.i686 \
     && rm -rf /var/cache/yum/* \
     && yum clean all
 
-ADD 16-03-15-DBACCESS_LINUX64_20141119.TAR.GZ /opt/totvs/dbaccess
+ADD 16-11-10-DBACCESS_LINUX64_20160402.TAR.GZ /totvs11/dbaccess64
 
-ADD /build /build
+COPY /build /build
+
 RUN /build/setup.sh
 
 EXPOSE 7890
 
-WORKDIR /opt/totvs/dbaccess/multi
+WORKDIR /totvs11/dbaccess64/multi
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 

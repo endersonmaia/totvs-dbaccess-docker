@@ -1,12 +1,12 @@
-dbaccess64:
-  build: .
-  links:
-    - database:postgres
-  ports:
-    - "7890:7890"
+version: '3'
 
-database:
-  build: ./postgres/
-  environment:
-    - POSTGRES_USER=protheus
-    - POSTGRES_PASS=protheus
+services:
+
+  dbaccess:
+    build: .
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}

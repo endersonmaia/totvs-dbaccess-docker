@@ -6,11 +6,9 @@ Docker é um _runtime_ para execução de LinuX _Containers_ (LXC). Este reposit
 
 ## Como usar esta imagem ?
 
-Você pode clonar este repositório e construir a sua própria imagem. O repositório pretende manter-se em sincronia com os lançamentos dos novos binários do TOTVS DBAccess fornecidos pela TOTVS. Então, para cada release, haverá uma tag no repositório.
+Você pode clonar este reposutório e construir a sua própria imagem. O repositóprio pretende manter-se em sincronia com os lançamentos dos novos binários do TOTVS DBAccess fornecidos pela TOTVS. Então, para cada release, haverá uma tag no repositório.
 
 Quando clonar o repositório, basta fazer o checkout para a tag específica, baixar o arquivo `.tar.gz` do DBAccess correspondente àquela tag (https://suporte.totvs.com/download), e executar o comando `$ docker build .`.
-
-O dbaccess já inicia com uma configuração de usuário e senha padrão como `protheus`. Caso você precise modificar, use o `dbmonitor`.
 
 ### O jeito fácil!
 
@@ -18,7 +16,8 @@ Instale o Docker Compose, e execute os comandos a seguir :
 
 ````
 $ git clone https://github.com/endersonmaia/totvs-dbaccess-docker
-$ git checkout 20141119
+$ git checkout 20160402-16-11-10
+$ 
 $ docker-compose up
 ````
 
@@ -30,7 +29,7 @@ Para construir sua imagem, execute os comandos a seguir:
 $ git clone https://github.com/endersonmaia/totvs-dbaccess-docker
 $ cd totvs-dbaccess-docker
 $ git checkout 20141119
-$ docker build -t totvs-dbaccess64:20141119 .
+$ docker build -t dbaccess64-20141119 .
 ````
 
 ### Executando o DBAccess64
@@ -45,10 +44,10 @@ $ docker run -d --name postgres \
 $ docker run -d --name dbaccess \
   --link postgres:postgres \
   -p 7890:7890 \
-  totvs-dbaccess64:20141119
+  dbaccess64-20141119
 $ docker ps
 CONTAINER ID        IMAGE                COMMAND                CREATED              STATUS              PORTS                    NAMES
-b99abd595634        totvs-dbacces64:20141119   "/docker-entrypoint.   About a minute ago   Up About a minute   0.0.0.0:7890->7890/tcp   dbaccess            
+b99abd595634        dbacces64-20141119   "/docker-entrypoint.   About a minute ago   Up About a minute   0.0.0.0:7890->7890/tcp   dbaccess            
 e472b722662d        postgres:9.3         "/docker-entrypoint.   About a minute ago   Up About a minute   5432/tcp                 postgres       
 ````
 
@@ -68,7 +67,7 @@ $ docker run -d --name dbaccess \
   -e DB_PASS=p@55W0rD \
   -e DB_NAME=protheus \
   -p 7890:7890 \
-  totvs-dbaccess64:20141119
+  dbaccess64-20141119
 ````
 
 Ou você pode alterar o arquivo `docker-compose.yml`, para usar o comando `docker-compose up`, sempre que precisar levantar o DBAccess.

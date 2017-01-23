@@ -1,12 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
+cp /build/odbc.ini /etc/odbc.ini
+cp /build/dbaccess.ini /totvs11/dbaccess64/multi/
 cp /build/docker-entrypoint.sh /
-cp /build/odbc.ini /root/.odbc.ini
-cp /build/dbaccess.ini /opt/totvs/dbaccess/multi/
 
-ln -s /usr/lib64/psqlodbcw.so /usr/lib64/libpsqlodbc.so
+odbcinst -i -s -l -f /etc/odbc.ini
 
-echo "/opt/totvs/dbaccess/multi/" > /etc/ld.so.conf.d/dbaccess64-libs.conf
+echo "/totvs11/dbaccess64/multi/" > /etc/ld.so.conf.d/dbaccess64-libs.conf
 /sbin/ldconfig
+
+chmod +x /totvs11/dbaccess64/dbmonitor
+chown -R root:root /totvs11
 
 rm -rf /build
