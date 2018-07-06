@@ -2,7 +2,8 @@ FROM centos:7.3.1611
 
 LABEL maintainer "Enderson Maia <endersonmaia@gmail.com>"
 
-RUN yum -y update \
+RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo \
+    && yum -y update \
     && yum -y install \
       dejavu-lgc-sans-fonts\
       fontconfig \
@@ -18,6 +19,7 @@ RUN yum -y update \
       postgresql \
       postgresql-odbc \
       zlib.i686 \
+    && ACCEPT_EULA=Y yum install -y msodbcsql17 \
     && rm -rf /var/cache/yum/* \
     && yum clean all
 
