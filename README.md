@@ -55,9 +55,24 @@ Agora basta que você acesse o DBMonitor, apontando para o IP do seu host que es
 
 ### Conectando em um banco já existente
 
-Caso você não queira usar o PostgreSQL 9.3 fornecido como imagem Docker, você pode informar os dados de acesso a um PostgreSQL existente.
+Caso você não queira usar o PostgreSQL 9.3 fornecido como imagem Docker, você pode informar os dados de acesso a um PostgreSQL ou SQL Server existente.
+
+#### Com DATABASE_URL
+
+Você pode usar uma variável de ambiente, DATABASE_URL como a seguir `[postgres|sqlserver]://<user>:<pass>@<host>:<port>/<database>`.
 
 Por exemplo:
+
+````
+$ docker run -d --name dbaccess \
+  -e DATABASE_URL=sqlserver://protheus:mypassword@databaseserver.example.com:1433/protheus \
+  -p 7890:7890 \
+  dbaccess64-20141119
+````
+
+#### Variáveis individuais
+
+Pode ser necessário usar variáveis separadas quando você tem caracteres especiais no nome de usuário e/ou senha, por ex:
 
 ````
 $ docker run -d --name dbaccess \
@@ -70,7 +85,9 @@ $ docker run -d --name dbaccess \
   dbaccess64-20141119
 ````
 
-Ou você pode alterar o arquivo `docker-compose.yml`, para usar o comando `docker-compose up`, sempre que precisar levantar o DBAccess.
+#### Via docker-compose
+
+Você ainda pode alterar o arquivo `docker-compose.yml` e ajustar as varáveis por lá, e usar o comando `docker-compose up`, sempre que precisar levantar o DBAccess.
 
 ### Executando o DBMonitor
 
@@ -119,3 +136,4 @@ Você deve informar o IP do seu OS X que seja acessível pelo `DOCKER_HOST`.
 * http://www.edivaldobrito.com.br/instalando-o-microsiga-protheus-com-postgresql-no-linux-parte-2/
 * https://docs.docker.com/userguide/
 * https://github.com/docker/docker/issues/8710#issuecomment-71113263
+* http://tdn.totvs.com/display/tec/DBAccess+-+Como+criar+uma+fonte+de+dados+para+uso+com+Microsoft+SQL+Server+-+Linux
