@@ -2,7 +2,7 @@
 
 cp /build/odbc.ini /etc/odbc.ini
 cp /build/dbaccess.ini /opt/totvs/dbaccess64/multi/
-cp /build/docker-entrypoint.sh /
+cp /build/my-init.sh /usr/local/bin
 
 odbcinst -i -s -l -f /etc/odbc.ini
 

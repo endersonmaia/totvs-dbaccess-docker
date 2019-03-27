@@ -1,13 +1,18 @@
 USER = endersonmaia
-NAME = $(USER)/totvs-dbaccess64
-VERSION = 18-04-16-20171117
+NAME = $(USER)/totvs-dbaccess
+VERSION = 20181212
 
-.PHONY: all build tag_latest release
-
+.PHONY: all
 all: build
 
+.PHONY: build
 build:
-	docker build -t $(NAME):$(VERSION) --rm .
+	docker image build -t $(NAME):$(VERSION) --rm .
 
+.PHONY: tag_latest
 tag_latest:
-	docker tag $(NAME):$(VERSION) $(NAME):latest
+	docker image tag $(NAME):$(VERSION) $(NAME):latest
+
+.PHONY: release
+	docker image push $(NAME):$(VERSION)
+	$(NAME):latest

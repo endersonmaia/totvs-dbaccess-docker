@@ -1,4 +1,4 @@
-FROM centos:7.3.1611
+FROM centos:7
 
 LABEL maintainer "Enderson Maia <endersonmaia@gmail.com>"
 
@@ -18,12 +18,18 @@ RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos
       mesa-libGL \
       postgresql \
       postgresql-odbc \
+      wget \
       zlib.i686 \
     && ACCEPT_EULA=Y yum install -y msodbcsql17 \
     && rm -rf /var/cache/yum/* \
     && yum clean all
 
-ADD 18-04-16-DBACCESS_LINUX_X64_20171117.TAR.GZ /opt/totvs/dbaccess64
+RUN DUMB_INIT_SHA256="37f2c1f0372a45554f1b89924fbb134fc24c3756efaedf11e07f599494e0eff9" \
+    && wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 \
+    && echo "37f2c1f0372a45554f1b89924fbb134fc24c3756efaedf11e07f599494e0eff9 */usr/bin/dumb-init" | sha256sum -c - \
+    && chmod +x /usr/bin/dumb-init
+
+ADD 19-02-14-DBACCESS_LINUX_X64_BUILD-20181212.TAR.GZ /opt/totvs/dbaccess64
 
 COPY /build /build
 
@@ -33,6 +39,6 @@ EXPOSE 7890
 
 WORKDIR /opt/totvs/dbaccess64/multi
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
-CMD [ "dbaccess" ]
+CMD [ "/usr/local/bin/my-init.sh", "dbaccess" ]
