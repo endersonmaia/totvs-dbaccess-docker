@@ -1,6 +1,6 @@
 USER = endersonmaia
 NAME = $(USER)/totvs-dbaccess
-VERSION = 20181212
+VERSION = 18.2.1.2
 
 .PHONY: all
 all: build

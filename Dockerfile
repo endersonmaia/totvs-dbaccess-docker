@@ -5,21 +5,9 @@ LABEL maintainer "Enderson Maia <endersonmaia@gmail.com>"
 RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo \
     && yum -y update \
     && yum -y install \
-      dejavu-lgc-sans-fonts\
-      fontconfig \
-      freetype \
-      libICE \
-      libXcursor \
-      libXft \
-      libXinerama  \
-      libXmu \
-      libXrandr  \
-      libXrender \
-      mesa-libGL \
       postgresql \
       postgresql-odbc \
       wget \
-      zlib.i686 \
     && ACCEPT_EULA=Y yum install -y msodbcsql17 \
     && rm -rf /var/cache/yum/* \
     && yum clean all
@@ -29,7 +17,7 @@ RUN DUMB_INIT_SHA256="37f2c1f0372a45554f1b89924fbb134fc24c3756efaedf11e07f599494
     && echo "37f2c1f0372a45554f1b89924fbb134fc24c3756efaedf11e07f599494e0eff9 */usr/bin/dumb-init" | sha256sum -c - \
     && chmod +x /usr/bin/dumb-init
 
-ADD 19-02-14-DBACCESS_LINUX_X64_BUILD-20181212.TAR.GZ /opt/totvs/dbaccess64
+ADD 19-07-26-DBACCESS_LINUX_X64_BUILD-20181212.TAR.GZ /opt/totvs/dbaccess64
 
 COPY /build /build
 
