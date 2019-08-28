@@ -2,7 +2,7 @@
 set -e
 
 if [ ! -z ${DATABASE_URL+x} ]; then
-  pattern='^(postgresql|sqlserver):\/\/([^:]+):([^@]+)@([^:]+):([^\/]\d+)\/(.+)'
+  pattern='^(postgres|mssql):\/\/([^:]+):([^@]+)@([^:]+):([^\/]\d+)\/(.+)'
 
   if [[ "${1}" =~ $pattern ]]; then
     export DB_TYPE=${BASH_REMATCH[1]}
@@ -23,11 +23,13 @@ else
   /bin/sed 's/{{DB_NAME}}/'"${DB_NAME}"'/' -i /etc/odbc.ini
 fi
 
-export LICENSE_SERVER=${LICENSE_SERVER:-127.0.0.1}
-export LICENSE_SERVER_PORT=${LICENSE_SERVER_PORT:-5555}
-
-/bin/sed 's/{{LICENSE_SERVER}}/'"${LICENSE_SERVER}"'/' -i /opt/totvs/dbaccess64/multi/dbaccess.ini
-/bin/sed 's/{{LICENSE_SERVER_PORT}}/'"${LICENSE_SERVER_PORT}"'/' -i /opt/totvs/dbaccess64/multi/dbaccess.ini
+/opt/totvs/dbaccess64/tools/dbaccesscfg \
+  -u ${DB_USER} \
+  -p ${DB_PASS} \
+  -d ${DB_TYPE} \
+  -a ${DB_NAME} \
+  -o "clientlibrary=/usr/lib64/libodbc.so" \
+  -g "LicenseServer=${LICENSE_SERVER};LicensePort=${LICENSE_SERVER_PORT};ByYouProc=0;ODBC30=1"
 
 if [ "$1" = 'dbaccess' ]; then
 
