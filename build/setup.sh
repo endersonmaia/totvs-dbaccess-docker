@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cp /build/odbc.ini /etc/odbc.ini
+cp /build/odbc.ini /etc
+cp /build/odbcinst.ini /etc
 cp /build/my-init.sh /usr/local/bin
 
 odbcinst -i -s -l -f /etc/odbc.ini

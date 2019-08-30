@@ -3,13 +3,14 @@ version: '3'
 services:
 
   dbaccess:
-    build: .
+    build: ./
     ports:
       - 7890:7890
+    env_file: ./.env
+
+  database:
+    build: ./postgres
     environment:
-      - DB_TYPE=${DB_TYPE}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_NAME=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASS}

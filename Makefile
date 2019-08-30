@@ -7,7 +7,7 @@ all: build
 
 .PHONY: build
 build:
-	docker image build -t $(NAME):$(VERSION) --rm .
+	docker image build --no-cache -t $(NAME):$(VERSION) --rm .
 
 .PHONY: tag_latest
 tag_latest:
