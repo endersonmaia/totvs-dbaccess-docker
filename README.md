@@ -1,3 +1,5 @@
+*REPOSITÓRIO ARQUIVADO*
+
 # TOTVS DBAccess 64bits Dockerfile
 
 ## O que é Docker ?
